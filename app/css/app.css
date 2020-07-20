@@ -1,0 +1,302 @@
+html {
+  background: #1e1e1e;
+  box-sizing: border-box;
+  color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  overflow-wrap: break-word;
+}
+
+* {
+  border: 0;
+  box-sizing: inherit;
+  line-height: 150%;
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline;
+}
+
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+.no-focus * {
+  outline: none;
+}
+
+h1,
+h2,
+h3 {
+  margin-bottom: 0.5em;
+}
+
+label,
+input {
+  color: #cccccc;
+  display: block;
+  margin-top: 0.5em;
+  font-size: 1rem;
+}
+
+input {
+  padding: 5px;
+  width: 100%;
+  background: transparent;
+  color: white;
+  border: 1px solid #818181;
+  border-radius: 3px;
+}
+
+button {
+  border: none;
+  background: transparent;
+  color: #ffffff;
+  font-size: 16px;
+}
+
+.hidden {
+  display: none;
+}
+.scrollable {
+  overflow-y: auto;
+  scrollbar-color: #cccccc #000000;
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-left: 1px solid #333333;
+  border-right: 1px solid #333333;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #333333;
+}
+
+.toolbar {
+  height: calc(100vh - 30px);
+  width: 80px;
+  background: #333333;
+}
+
+.toolbar__list {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  list-style: none;
+  padding: 10px 0;
+}
+
+.toolbar__list-item {
+  margin: 0;
+  padding: 10px 20px;
+}
+
+.toolbar__button {
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+}
+
+.toolbar__button svg {
+  fill: #838383;
+}
+
+.toolbar__button--active svg {
+  fill: #ffffff;
+}
+
+.toolbar__button:not(.toolbar__button--active):hover svg,
+.toolbar__button:not(.toolbar__button--active):focus svg {
+  fill: #cccccc;
+}
+
+.main-window {
+  display: flex;
+  flex-direction: row;
+}
+
+.active-window {
+  flex-basis: 100%;
+}
+
+.active-window__content {
+  height: calc(100vh - 70px);
+  padding: 2px;
+}
+
+.active-bar {
+  height: 40px;
+  width: 100%;
+  background: #252526;
+}
+
+.active-bar__list {
+  display: flex;
+  list-style: none;
+  height: 100%;
+}
+
+.active-bar__list-item {
+  align-items: center;
+  display: flex;
+}
+
+.tab {
+  align-items: center;
+  background: #333333;
+  color: #a5a5a5;
+  cursor: pointer;
+  display: flex;
+  height: 100%;
+  margin: 0 2px;
+  padding: 4px 18px 4px 14px;
+  text-decoration: none;
+}
+
+.tab:not(.tab--active):hover,
+.tab:not(.tab--active):focus {
+  color: #cccccc;
+}
+
+.tab--active {
+  background: #1e1e1e;
+  color: #ffffff;
+}
+
+.tab__icon {
+  fill: white;
+  height: 16px;
+  margin-right: 8px;
+  width: 16px;
+}
+
+.icon-scss {
+  fill: #147cb3;
+}
+
+.icon-preview {
+  fill: #a20067;
+}
+
+.tab__button {
+  width: 16px;
+  height: 16px;
+  margin-left: 8px;
+}
+
+.toolbox {
+  background: #252526;
+  height: calc(100vh - 30px);
+  width: 400px;
+}
+
+.toolbox__list {
+  display: flex;
+  height: 40px;
+  justify-content: space-evenly;
+  list-style: none;
+}
+
+.toolbox__list-item {
+  padding: 10px;
+}
+
+.toolbox__list-item {
+  padding: 10px;
+}
+
+.toolbar__list-item--tools {
+  margin-top: auto;
+}
+
+.toolbox__button {
+  cursor: pointer;
+  height: 20px;
+  width: 20px;
+}
+
+.toolbox__button--active .toolbox__icon {
+  fill: #ffffff;
+}
+
+.toolbox__button:not(.toolbox__button--active):hover .toolbox__icon,
+.toolbox__button:not(.toolbox__button--active):focus .toolbox__icon {
+  fill: #cccccc;
+}
+
+.toolbox__icon {
+  fill: #838383;
+}
+
+.toolbox__controls {
+  height: calc(100vh - 70px);
+  padding: 20px;
+}
+
+.status-bar {
+  height: 30px;
+  width: 100%;
+  background: #008c10;
+}
+
+.status-bar__item {
+  padding: 2px 10px;
+  display: flex;
+  align-items: center;
+}
+
+.status-bar__icon {
+  fill: #ffffff;
+  height: 16px;
+  margin-right: 10px;
+  width: 16px;
+}
+
+.welcome {
+  height: 100%;
+  width: 75%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.welcome__logo {
+  padding-bottom: 40px;
+  max-width: 350px;
+}
+
+.welcome__info {
+  color: #cccccc;
+}
+
+.content-container {
+  display: initial;
+  min-height: 100%;
+}
+
+.content {
+  height: 100%;
+  outline: none;
+}
+
+.flex-col {
+  display: flex;
+  padding: 0 10px;
+  width: 50%;
+}
+
+.flex-row {
+  display: flex;
+}

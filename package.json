@@ -1,0 +1,30 @@
+{
+  "name": "themer",
+  "version": "0.0.1",
+  "description": "Cross platform theming application for web apps",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/danielelder/themer.git"
+  },
+  "build": {
+    "appId": "themer.app",
+    "mac": {
+      "category": "themer.app.category.developer-tools"
+    }
+  },
+  "main": "app/main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "author": "Dan Elder",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "electron": "^8.0.1",
+    "electron-builder": "^22.3.2",
+    "electron-store": "^5.1.0",
+    "sass": "^1.25.0"
+  },
+  "postinstall": "electron-builder install-app-deps"
+}

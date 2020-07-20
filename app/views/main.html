@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' data:; worker-src 'self' blob:">
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' data:; worker-src 'self' blob:">
+    <title>Themer</title>
+    <link rel="stylesheet" href="./css/app.css">
+    <link rel="stylesheet" href="./css/theme.css">
+  </head>
+  <body>
+    <main class="main-window">
+      <section class="toolbar">
+        <ul class="toolbar__list">
+          <li class="toolbar__list-item">
+            <button title="Edit styles" class="toolbar__button toolbar__button--active">
+              <svg viewBox="-5 -3 36 36" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.482 27.429l1.625-1.625-4.196-4.196-1.625 1.625v1.911h2.286v2.286h1.911zM15.821 10.857q0-0.393-0.393-0.393-0.179 0-0.304 0.125l-9.679 9.679q-0.125 0.125-0.125 0.304 0 0.393 0.393 0.393 0.179 0 0.304-0.125l9.679-9.679q0.125-0.125 0.125-0.304zM14.857 7.429l7.429 7.429-14.857 14.857h-7.429v-7.429zM27.054 9.143q0 0.946-0.661 1.607l-2.964 2.964-7.429-7.429 2.964-2.946q0.643-0.679 1.607-0.679 0.946 0 1.625 0.679l4.196 4.179q0.661 0.696 0.661 1.625z"></path>
+              </svg>
+            </button>
+          </li>
+          <li class="toolbar__list-item">
+            <button title="Open stylesheet" class="toolbar__button">
+              <svg viewBox="-5 -3 36 36" xmlns="http://www.w3.org/2000/svg">
+                <path d="M26.214 6.786q0.5 0.5 0.857 1.357t0.357 1.571v20.571q0 0.714-0.5 1.214t-1.214 0.5h-24q-0.714 0-1.214-0.5t-0.5-1.214v-28.571q0-0.714 0.5-1.214t1.214-0.5h16q0.714 0 1.571 0.357t1.357 0.857zM18.286 2.429v6.714h6.714q-0.179-0.518-0.393-0.732l-5.589-5.589q-0.214-0.214-0.732-0.393zM25.143 29.714v-18.286h-7.429q-0.714 0-1.214-0.5t-0.5-1.214v-7.429h-13.714v27.429h22.857zM6.857 14.286q0-0.25 0.161-0.411t0.411-0.161h12.571q0.25 0 0.411 0.161t0.161 0.411v1.143q0 0.25-0.161 0.411t-0.411 0.161h-12.571q-0.25 0-0.411-0.161t-0.161-0.411v-1.143zM20 18.286q0.25 0 0.411 0.161t0.161 0.411v1.143q0 0.25-0.161 0.411t-0.411 0.161h-12.571q-0.25 0-0.411-0.161t-0.161-0.411v-1.143q0-0.25 0.161-0.411t0.411-0.161h12.571zM20 22.857q0.25 0 0.411 0.161t0.161 0.411v1.143q0 0.25-0.161 0.411t-0.411 0.161h-12.571q-0.25 0-0.411-0.161t-0.161-0.411v-1.143q0-0.25 0.161-0.411t0.411-0.161h12.571z"></path>
+              </svg>
+            </button>
+          </li>
+          <li class="toolbar__list-item">
+            <button title="Search" class="toolbar__button">
+              <svg viewBox="-5 -3 40 42" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20.571 14.857q0-3.304-2.348-5.652t-5.652-2.348-5.652 2.348-2.348 5.652 2.348 5.652 5.652 2.348 5.652-2.348 2.348-5.652zM29.714 29.714q0 0.929-0.679 1.607t-1.607 0.679q-0.964 0-1.607-0.679l-6.125-6.107q-3.196 2.214-7.125 2.214-2.554 0-4.884-0.991t-4.018-2.679-2.679-4.018-0.991-4.884 0.991-4.884 2.679-4.018 4.018-2.679 4.884-0.991 4.884 0.991 4.018 2.679 2.679 4.018 0.991 4.884q0 3.929-2.214 7.125l6.125 6.125q0.661 0.661 0.661 1.607z"></path>
+              </svg>
+            </button>
+          </li>
+          <li class="toolbar__list-item">
+            <button id="refreshStyles" title="Refresh styles" class="toolbar__button">
+              <svg viewBox="-5 -3 36 36" xmlns="http://www.w3.org/2000/svg">
+                <path d="M23.609 16.5c0 0.031 0 0.078-0.016 0.109-1.328 5.531-5.891 9.391-11.656 9.391-3.047 0-6-1.203-8.219-3.313l-2.016 2.016c-0.187 0.187-0.438 0.297-0.703 0.297-0.547 0-1-0.453-1-1v-7c0-0.547 0.453-1 1-1h7c0.547 0 1 0.453 1 1 0 0.266-0.109 0.516-0.297 0.703l-2.141 2.141c1.469 1.375 3.422 2.156 5.437 2.156 2.781 0 5.359-1.437 6.813-3.813 0.375-0.609 0.562-1.203 0.828-1.828 0.078-0.219 0.234-0.359 0.469-0.359h3c0.281 0 0.5 0.234 0.5 0.5zM24 4v7c0 0.547-0.453 1-1 1h-7c-0.547 0-1-0.453-1-1 0-0.266 0.109-0.516 0.297-0.703l2.156-2.156c-1.484-1.375-3.437-2.141-5.453-2.141-2.781 0-5.359 1.437-6.813 3.813-0.375 0.609-0.562 1.203-0.828 1.828-0.078 0.219-0.234 0.359-0.469 0.359h-3.109c-0.281 0-0.5-0.234-0.5-0.5v-0.109c1.344-5.547 5.953-9.391 11.719-9.391 3.063 0 6.047 1.219 8.266 3.313l2.031-2.016c0.187-0.187 0.438-0.297 0.703-0.297 0.547 0 1 0.453 1 1z"></path>
+              </svg>
+            </button>
+          </li>
+          <li class="toolbar__list-item toolbar__list-item--tools">
+            <button title="Preferences" class="toolbar__button">
+              <svg viewBox="-5 -3 36 36" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6.857 26.286q0-0.464-0.339-0.804t-0.804-0.339-0.804 0.339-0.339 0.804 0.339 0.804 0.804 0.339 0.804-0.339 0.339-0.804zM18.357 18.786l-12.179 12.179q-0.661 0.661-1.607 0.661-0.929 0-1.625-0.661l-1.893-1.929q-0.679-0.643-0.679-1.607 0-0.946 0.679-1.625l12.161-12.161q0.696 1.75 2.045 3.098t3.098 2.045zM29.679 11.018q0 0.696-0.411 1.893-0.839 2.393-2.938 3.884t-4.616 1.491q-3.304 0-5.652-2.348t-2.348-5.652 2.348-5.652 5.652-2.348q1.036 0 2.17 0.295t1.92 0.83q0.286 0.196 0.286 0.5t-0.286 0.5l-5.232 3.018v4l3.446 1.911q0.089-0.054 1.411-0.866t2.42-1.446 1.259-0.634q0.268 0 0.42 0.179t0.152 0.446z"></path>
+              </svg>
+            </button>
+          </li>
+        </ul>
+      </section>
+      <section class="active-window">
+        <nav class="active-bar">
+          <ul class="active-bar__list">
+            <li class="active-bar__list-item">
+              <button class="tab tab--active" data-section="welcome-window">
+                <span class="tab__text">Welcome</span>
+              </button>
+            </li>
+            <li class="active-bar__list-item">
+              <button class="tab" data-section="preview-window">
+                <svg class="tab__icon icon-preview" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M369.9 97.9L286 14C277 5 264.8-.1 252.1-.1H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48V131.9c0-12.7-5.1-25-14.1-34zM332.1 128H256V51.9l76.1 76.1zM48 464V48h160v104c0 13.3 10.7 24 24 24h104v288H48z"/>
+                </svg>
+                <span class="tab__text">Preview</span>
+              </button>
+            </li>
+            <li class="active-bar__list-item">
+              <button class="tab" data-section="stylesheet-window">
+                <svg class="tab__icon icon-scss" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M22.548 9l.452-2h-5.364l1.364-6h-2l-1.364 6h-5l1.364-6h-2l-1.364 6h-6.184l-.452 2h6.182l-1.364 6h-5.36l-.458 2h5.364l-1.364 6h2l1.364-6h5l-1.364 6h2l1.364-6h6.185l.451-2h-6.182l1.364-6h5.366zm-8.73 6h-5l1.364-6h5l-1.364 6z"/>
+                </svg>
+                <span class="tab__text">Stylesheet</span>
+              </button>
+            </li>
+          </ul>
+        </nav>
+        <div class="active-window__content scrollable">
+          <div class="content-container">
+            <!-- Views -->
+            <!-- Welcome -->
+            <div class="content" id="welcome-window" aria-label="Welcome message">
+              <div class="welcome">
+                <svg class="welcome__logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#1a1a1a" d="M204.3 5C104.9 24.4 24.8 104.3 5.2 203.4c-37 187 131.7 326.4 258.8 306.7 41.2-6.4 61.4-54.6 42.5-91.7-23.1-45.4 9.9-98.4 60.9-98.4h79.7c35.8 0 64.8-29.6 64.9-65.3C511.5 97.1 368.1-26.9 204.3 5zM96 320c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32zm32-128c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32zm128-64c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32zm128 64c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32z"/></svg>
+                <h1>Welcome to Themer!</h1>
+                <div class="welcome__info">
+                  <div class="flex-row">
+                    <div class="flex-col">Version</div>
+                    <div class="flex-col"><span id="app-version">nope</span></div>
+                  </div>
+                  <div class="flex-row">
+                    <div class="flex-col">Node.js</div>
+                    <div class="flex-col"><span id="node-version"></span></div>
+                  </div>
+                  <div class="flex-row">
+                    <div class="flex-col">Chromium</div>
+                    <div class="flex-col"><span id="chrome-version"></span></div>
+                  </div>
+                  <div class="flex-row">
+                    <div class="flex-col">Electron</div>
+                    <div class="flex-col"><span id="electron-version"></span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="content hidden" id="preview-window" aria-label="Preview changes">
+
+            </div>
+            <div class="content hidden" id="stylesheet-window" aria-label="Stylesheet editor" style="height: 100%; width: 100%">
+
+
+
+
+              <div style="height: 100%; width: 100%">
+                <script type="text/plain" style="display:block; height: 100%; width: 100%" id="editor">html {
+  background: #1e1e1e;
+  box-sizing: border-box;
+  color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  overflow-wrap: break-word;
+}
+
+* {
+  border: 0;
+  box-sizing: inherit;
+  line-height: 150%;
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline;
+}
+
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+.no-focus * {
+  outline: none;
+}
+
+h1,
+h2,
+h3 {
+  margin-bottom: 0.5em;
+}
+
+label,
+input {
+  color: #cccccc;
+  display: block;
+  margin-top: 0.5em;
+  font-size: 1rem;
+}
+
+input {
+  padding: 5px;
+  width: 100%;
+  background: transparent;
+  color: white;
+  border: 1px solid #818181;
+  border-radius: 3px;
+}
+
+button {
+  border: none;
+  background: transparent;
+  color: #ffffff;
+  font-size: 16px;
+}
+
+.hidden {
+  display: none;
+}
+.scrollable {
+  overflow-y: auto;
+  scrollbar-color: #cccccc #000000;
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-left: 1px solid #333333;
+  border-right: 1px solid #333333;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #333333;
+}
+
+.toolbar {
+  height: calc(100vh - 30px);
+  width: 80px;
+  background: #333333;
+}
+
+.toolbar__list {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  list-style: none;
+  padding: 10px 0;
+}
+
+.toolbar__list-item {
+  margin: 0;
+  padding: 10px 20px;
+}
+
+.toolbar__button {
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+}
+
+.toolbar__button svg {
+  fill: #838383;
+}
+
+.toolbar__button--active svg {
+  fill: #ffffff;
+}
+
+.toolbar__button:not(.toolbar__button--active):hover svg,
+.toolbar__button:not(.toolbar__button--active):focus svg {
+  fill: #cccccc;
+}
+
+.main-window {
+  display: flex;
+  flex-direction: row;
+}
+
+.active-window {
+  flex-basis: 100%;
+}
+
+.active-window__content {
+  height: calc(100vh - 70px);
+  padding: 2px;
+}
+
+.active-bar {
+  height: 40px;
+  width: 100%;
+  background: #252526;
+}
+
+.active-bar__list {
+  display: flex;
+  list-style: none;
+  height: 100%;
+}
+
+.active-bar__list-item {
+  align-items: center;
+  display: flex;
+}
+
+.tab {
+  align-items: center;
+  background: #333333;
+  color: #a5a5a5;
+  cursor: pointer;
+  display: flex;
+  height: 100%;
+  margin: 0 2px;
+  padding: 4px 18px 4px 14px;
+  text-decoration: none;
+}
+
+.tab:not(.tab--active):hover,
+.tab:not(.tab--active):focus {
+  color: #cccccc;
+}
+
+.tab--active {
+  background: #1e1e1e;
+  color: #ffffff;
+}
+
+.tab__icon {
+  fill: white;
+  height: 16px;
+  margin-right: 8px;
+  width: 16px;
+}
+
+.icon-scss {
+  fill: #147cb3;
+}
+
+.icon-preview {
+  fill: #a20067;
+}
+
+.tab__button {
+  width: 16px;
+  height: 16px;
+  margin-left: 8px;
+}
+
+.toolbox {
+  background: #252526;
+  height: calc(100vh - 30px);
+  width: 400px;
+}
+
+.toolbox__list {
+  display: flex;
+  height: 40px;
+  justify-content: space-evenly;
+  list-style: none;
+}
+
+.toolbox__list-item {
+  padding: 10px;
+}
+
+.toolbox__list-item {
+  padding: 10px;
+}
+
+.toolbar__list-item--tools {
+  margin-top: auto;
+}
+
+.toolbox__button {
+  cursor: pointer;
+  height: 20px;
+  width: 20px;
+}
+
+.toolbox__button--active .toolbox__icon {
+  fill: #ffffff;
+}
+
+.toolbox__button:not(.toolbox__button--active):hover .toolbox__icon,
+.toolbox__button:not(.toolbox__button--active):focus .toolbox__icon {
+  fill: #cccccc;
+}
+
+.toolbox__icon {
+  fill: #838383;
+}
+
+.toolbox__controls {
+  height: calc(100vh - 70px);
+  padding: 20px;
+}
+
+.status-bar {
+  height: 30px;
+  width: 100%;
+  background: #008c10;
+}
+
+.status-bar__item {
+  padding: 2px 10px;
+  display: flex;
+  align-items: center;
+}
+
+.status-bar__icon {
+  fill: #ffffff;
+  height: 16px;
+  margin-right: 10px;
+  width: 16px;
+}
+
+.welcome {
+  height: 100%;
+  width: 75%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.welcome__logo {
+  padding-bottom: 40px;
+  max-width: 350px;
+}
+
+.welcome__info {
+  color: #cccccc;
+}
+
+.content-container {
+  display: initial;
+  min-height: 100%;
+}
+
+.content {
+  outline: none;
+}
+
+.flex-col {
+  display: flex;
+  padding: 0 10px;
+  width: 50%;
+}
+
+.flex-row {
+  display: flex;
+}
+
+                  </script>
+                </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="toolbox">
+        <ul class="toolbox__list">
+          <li class="toolbox__list-item">
+            <button title="Colour palette" class="toolbox__button toolbox__button--active">
+              <svg class="toolbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M204.3 5C104.9 24.4 24.8 104.3 5.2 203.4c-37 187 131.7 326.4 258.8 306.7 41.2-6.4 61.4-54.6 42.5-91.7-23.1-45.4 9.9-98.4 60.9-98.4h79.7c35.8 0 64.8-29.6 64.9-65.3C511.5 97.1 368.1-26.9 204.3 5zM96 320c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32zm32-128c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32zm128-64c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32zm128 64c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32z"/></svg>
+            </button>
+          </li>
+          <li class="toolbox__list-item">
+            <button title="Typography" class="toolbox__button">
+              <svg class="toolbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M152 416h-24.013l26.586-80.782H292.8L319.386 416H296c-8.837 0-16 7.163-16 16v32c0 8.837 7.163 16 16 16h136c8.837 0 16-7.163 16-16v-32c0-8.837-7.163-16-16-16h-26.739L275.495 42.746A16 16 0 0 0 260.382 32h-72.766a16 16 0 0 0-15.113 10.746L42.739 416H16c-8.837 0-16 7.163-16 16v32c0 8.837 7.163 16 16 16h136c8.837 0 16-7.163 16-16v-32c0-8.837-7.163-16-16-16zm64.353-271.778c4.348-15.216 6.61-28.156 7.586-34.644.839 6.521 2.939 19.476 7.727 34.706l41.335 124.006h-98.619l41.971-124.068z"/></svg>
+            </button>
+          </li>
+          <li class="toolbox__list-item">
+            <button title="Iconography" class="toolbox__button">
+              <svg class="toolbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M239.1 6.3l-208 78c-18.7 7-31.1 25-31.1 45v225.1c0 18.2 10.3 34.8 26.5 42.9l208 104c13.5 6.8 29.4 6.8 42.9 0l208-104c16.3-8.1 26.5-24.8 26.5-42.9V129.3c0-20-12.4-37.9-31.1-44.9l-208-78C262 2.2 250 2.2 239.1 6.3zM256 68.4l192 72v1.1l-192 78-192-78v-1.1l192-72zm32 356V275.5l160-65v133.9l-160 80z"/></svg>
+            </button>
+          </li>
+          <li class="toolbox__list-item">
+            <button title="Layout" class="toolbox__button">
+              <svg class="toolbox__icon" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                <path d="M149.333 56v80c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24V56c0-13.255 10.745-24 24-24h101.333c13.255 0 24 10.745 24 24zm181.334 240v-80c0-13.255-10.745-24-24-24H205.333c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24h101.333c13.256 0 24.001-10.745 24.001-24zm32-240v80c0 13.255 10.745 24 24 24H488c13.255 0 24-10.745 24-24V56c0-13.255-10.745-24-24-24H386.667c-13.255 0-24 10.745-24 24zm-32 80V56c0-13.255-10.745-24-24-24H205.333c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24h101.333c13.256 0 24.001-10.745 24.001-24zm-205.334 56H24c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24h101.333c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24zM0 376v80c0 13.255 10.745 24 24 24h101.333c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24H24c-13.255 0-24 10.745-24 24zm386.667-56H488c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24H386.667c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24zm0 160H488c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24H386.667c-13.255 0-24 10.745-24 24v80c0 13.255 10.745 24 24 24zM181.333 376v80c0 13.255 10.745 24 24 24h101.333c13.255 0 24-10.745 24-24v-80c0-13.255-10.745-24-24-24H205.333c-13.255 0-24 10.745-24 24z"></path>
+              </svg>
+            </button>
+          </li>
+          <li class="toolbox__list-item">
+            <button title="Naigation" class="toolbox__button">
+              <svg class="toolbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 455 512">
+                <path d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"></path>
+              </svg>
+            </button>
+          </li>
+          <li class="toolbox__list-item">
+            <button title="Components" class="toolbox__button">
+              <svg class="toolbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M369.9 97.9L286 14C277 5 264.8-.1 252.1-.1H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48V131.9c0-12.7-5.1-25-14.1-34zM332.1 128H256V51.9l76.1 76.1zM48 464V48h160v104c0 13.3 10.7 24 24 24h104v288H48z"/></svg>
+            </button>
+          </li>
+        </ul>
+        <div class="toolbox__controls scrollable">
+          <div class="content-container">
+            <h2>Colour palette</h2>
+            <label>
+              Primary colour
+              <input type="text">
+            </label>
+            <label>
+              Secondary colour
+              <input type="text">
+            </label>
+            <label>
+              Border colour
+              <input type="text">
+            </label>
+            <label>
+              Font colour
+              <input type="text">
+            </label>
+          </div>
+        </div>
+      </section>
+    </main>
+    <div class="status-bar">
+      <span class="status-bar__item" role="alert">
+        <svg class="status-bar__icon" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18.286 24.554v-3.393q0-0.25-0.17-0.42t-0.402-0.17h-3.429q-0.232 0-0.402 0.17t-0.17 0.42v3.393q0 0.25 0.17 0.42t0.402 0.17h3.429q0.232 0 0.402-0.17t0.17-0.42zM18.25 17.875l0.321-8.196q0-0.214-0.179-0.339-0.232-0.196-0.429-0.196h-3.929q-0.196 0-0.429 0.196-0.179 0.125-0.179 0.375l0.304 8.161q0 0.179 0.179 0.295t0.429 0.116h3.304q0.25 0 0.42-0.116t0.188-0.295zM18 1.196l13.714 25.143q0.625 1.125-0.036 2.25-0.304 0.518-0.83 0.821t-1.134 0.304h-27.429q-0.607 0-1.134-0.304t-0.83-0.821q-0.661-1.125-0.036-2.25l13.714-25.143q0.304-0.554 0.839-0.875t1.161-0.321 1.161 0.321 0.839 0.875z"></path>
+        </svg>
+        Status
+      </span>
+    </div>
+
+    <!-- App scripts -->
+    <script src="./js/renderer.js"></script>
+    <script src="./js/app.js"></script>
+    <script src="./js/views.js"></script>
+
+    <!-- Ace editor scripts -->
+    <script src="./lib/ace.js"></script>
+    <script src="./lib/mode-html.js"></script>
+    <script src="./lib/theme-twilight.js"></script>
+    <script src="./js/editor.js"></script>
+  </body>
+</html>

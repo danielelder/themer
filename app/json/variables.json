@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Colour palette",
+    "icon": "",
+    "variables": [
+      {"name": "$primary", "label": "Primary colour", "default": "#ffffff"},
+      {"name": "$secondary", "label": "Secondary colour", "default": "#ffffff"},
+      {"name": "$border", "label": "Border colour", "default": "#ffffff"},
+      {"name": "$font", "label": "Font colour", "default": "#ffffff"}
+    ]
+  },
+  {
+    "name": "Typography",
+    "icon": "",
+    "variables": [
+      {"name": "$heading1", "label": "Heading 1 (H1)", "default": "32px"},
+      {"name": "$heading2", "label": "Heading 1 (H1)", "default": "28px"},
+      {"name": "$heading3", "label": "Heading 1 (H1)", "default": "24px"},
+      {"name": "$heading4", "label": "Heading 1 (H1)", "default": "20px"}
+    ]
+  }
+]
